@@ -11,6 +11,7 @@ model = keras.Sequential([
     layers.Dense(10, activation='softmax')
 ])
 
+# configures the model for training
 model.compile(optimizer='rmsprop',
               loss='sparse_categorical_crossentropy',
                 metrics=['accuracy'])
@@ -24,6 +25,15 @@ test_images = test_images.astype("float32") / 255
 # Train the model
 model.fit(train_images, train_labels, epochs=5, batch_size=128)
               
-              
-              
+test_digits = test_images[0:10]
+predictions = model.predict(test_digits)
+print(predictions[0]) 
+print(predictions[0][7]) 
+
+print(test_labels[0]) 
+
+# evaluate the model on new data
+test_loss, test_acc = model.evaluate(test_images, test_labels)
+print('Test accuracy:', test_acc)
+
 
